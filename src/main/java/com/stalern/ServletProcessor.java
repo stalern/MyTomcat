@@ -55,7 +55,10 @@ class ServletProcessor {
         try {
             if (clazz != null) {
                 servlet = (Servlet) clazz.newInstance();
-                servlet.service(request, response);
+                // 防止servlet调用request和response的其他方法，故产生了外观类
+                ResponseFacade responseFacade = new ResponseFacade(response);
+                RequestFacade requestFacade = new RequestFacade(request);
+                servlet.service(requestFacade, responseFacade);
             }
         } catch (Exception e) {
             e.printStackTrace();
