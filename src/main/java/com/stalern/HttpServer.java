@@ -19,6 +19,11 @@ public class HttpServer {
      * resources 是我们存放静态资源的目录
      */
     static final String WEB_ROOT = System.getProperty("user.dir") + File.separator + "src\\main\\resources";
+    /**
+     * 是存放servlet的class文件的地方
+     */
+    static final String WEB_CONTROLLER = "E:\\Codes\\GitHub\\Tomcat\\production\\MyTomcat\\com\\stalern\\controller";
+            // System.getProperty("user.dir") + File.separator + "src\\main\\java\\com\\stalern\\controller";
 
     private static final String SHUTDOWN_COMMAND = "/SHUTDOWN";
 
@@ -48,7 +53,6 @@ public class HttpServer {
 
         // 等待响应
         while (!shutdown){
-            String uri = null;
             // 拿到服务端接收的socket
             try(Socket socket = serverSocket.accept()) {
 
@@ -63,16 +67,25 @@ public class HttpServer {
                 // 服务端作出响应并把输出流response到客户端
                 Response response = new Response(outputStream);
                 response.setRequest(request);
-                response.sendStaticResource();
+                // response.sendStaticResource();
 
-                uri = request.getUri();
+                String uri = request.getUri();
+                if (uri != null){
+                    if (uri.startsWith("/servlet/")){
+                        ServletProcessor servletProcessor = new ServletProcessor();
+                        servletProcessor.process(request,response);
+                    } else {
+                        StaticResourceProcessor staticResourceProcessor = new StaticResourceProcessor();
+                        staticResourceProcessor.process(request,response);
+                    }
+
+                    // 接收URI，观察是否关闭服务器
+                    // 有时候不知道为什么会request会变成空指针
+                    shutdown = uri.equals(SHUTDOWN_COMMAND);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            // 接收URI，观察是否关闭服务器
-            // 有时候不知道为什么会request会变成空指针
-            shutdown = uri != null && uri.equals(SHUTDOWN_COMMAND);
         }
     }
 }
