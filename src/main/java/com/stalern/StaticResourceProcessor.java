@@ -1,5 +1,8 @@
 package com.stalern;
 
+import com.stalern.connector.http.HttpRequest;
+import com.stalern.connector.http.HttpResponse;
+
 import java.io.IOException;
 
 /**
@@ -7,8 +10,8 @@ import java.io.IOException;
  * @author stalern
  * @date 2019/9/30--15:33
  */
-class StaticResourceProcessor {
-    void process(Request request, Response response){
+public class StaticResourceProcessor {
+    public void process(HttpRequest request, HttpResponse response){
         try {
             response.sendStaticResource();
         } catch (IOException e) {

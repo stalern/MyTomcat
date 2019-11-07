@@ -1,5 +1,6 @@
 package com.stalern;
 
+import com.stalern.connector.http.*;
 import com.stalern.controller.PrimitiveServlet;
 
 import javax.servlet.Servlet;
@@ -15,10 +16,10 @@ import java.net.URLStreamHandler;
  * @author stalern
  * @date 2019/9/30--15:37
  */
-class ServletProcessor {
+public class ServletProcessor {
 
-    void process(Request request, Response response) {
-        String uri = request.getUri();
+    public void process(HttpRequest request, HttpResponse response) {
+        String uri = request.getRequestURI();
         // 截取URI的最后一个路径作为servletName
         String servletName = uri.substring(uri.lastIndexOf('/') + 1);
         System.out.println(servletName);
@@ -27,7 +28,7 @@ class ServletProcessor {
         try {
             URL[] urls = new URL[1];
             URLStreamHandler streamHandler = null;
-            File classPath = new File(HttpServer.WEB_CONTROLLER);
+            File classPath = new File(Constants.WEB_CONTROLLER);
 
             // 拿到servlet的路径
             String repository = String.valueOf(new URL("file", null, classPath.getCanonicalPath() + File.separator));
@@ -56,8 +57,8 @@ class ServletProcessor {
             if (clazz != null) {
                 servlet = (Servlet) clazz.newInstance();
                 // 防止servlet调用request和response的其他方法，故产生了外观类
-                ResponseFacade responseFacade = new ResponseFacade(response);
-                RequestFacade requestFacade = new RequestFacade(request);
+                HttpResponseFacade responseFacade = new HttpResponseFacade(response);
+                HttpRequestFacade requestFacade = new HttpRequestFacade(request);
                 servlet.service(requestFacade, responseFacade);
             }
         } catch (Exception e) {

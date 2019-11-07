@@ -1,10 +1,27 @@
 <component name="libraryTable">
   <library name="Jar">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../Jar" />
+      <root url="jar://$PROJECT_DIR$/../Jar/commons-beanutils.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jar/commons-collections.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jar/commons-daemon.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jar/commons-digester.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jar/commons-logging.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jar/commons-modeler.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jar/jaas.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jar/jakarta-regexp-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jar/jcert.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jar/jnet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jar/jsse.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jar/mx4j.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jar/naming-common.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jar/naming-factory.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jar/naming-resources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jar/servlet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jar/tomcat-util.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jar/xercesImpl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Jar/xmlParserAPIs.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
-    <jarDirectory url="file://$PROJECT_DIR$/../Jar" recursive="false" />
   </library>
 </component>
